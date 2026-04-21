@@ -1,0 +1,2 @@
+test_loss,test_accuracy,test_macro_precision,test_macro_recall,test_macro_f1,test_weighted_precision,test_weighted_recall,test_weighted_f1,test_balanced_accuracy
+3.2500373591603116,0.6075745366639806,0.516952511419243,0.3500938663178051,0.387972616434618,0.5852203890502783,0.6075745366639806,0.5806799486310823,0.3500938663178051

@@ -1,0 +1,25 @@
+                                             precision    recall  f1-score   support
+
+                   AERONAUTICAL ENGINEERING       0.67      0.09      0.16        22
+                     AUTOMATION ENGINEERING       0.00      0.00      0.00         5
+          CATASTRAL ENGINEERING AND GEODESY       0.35      0.28      0.31        39
+                       CHEMICAL ENGINEERING       0.63      0.54      0.58       500
+                        CIVIL CONSTRUCTIONS       1.00      0.14      0.25         7
+                          CIVIL ENGINEERING       0.55      0.68      0.61      1660
+                        CONTROL ENGINEERING       0.00      0.00      0.00        10
+                       ELECTRIC ENGINEERING       0.29      0.03      0.05       139
+ELECTRIC ENGINEERING AND TELECOMMUNICATIONS       0.50      0.04      0.08        24
+              ELECTROMECHANICAL ENGINEERING       0.00      0.00      0.00        17
+                     ELECTRONIC ENGINEERING       0.64      0.20      0.31       425
+           INDUSTRIAL AUTOMATIC ENGINEERING       1.00      0.91      0.95        11
+                     INDUSTRIAL ENGINEERING       0.64      0.76      0.69      2659
+                     MECHANICAL ENGINEERING       0.37      0.22      0.28       568
+                   MECHATRONICS ENGINEERING       1.00      0.37      0.54        41
+                     PRODUCTION ENGINEERING       0.00      0.00      0.00        30
+       PRODUCTIVITY AND QUALITY ENGINEERING       1.00      1.00      1.00        14
+                      TOPOGRAPHIC ENGINEERY       0.00      0.00      0.00        21
+        TRANSPORTATION AND ROAD ENGINEERING       0.75      0.46      0.57        13
+
+                                   accuracy                           0.60      6205
+                                  macro avg       0.49      0.30      0.34      6205
+                               weighted avg       0.58      0.60      0.57      6205
