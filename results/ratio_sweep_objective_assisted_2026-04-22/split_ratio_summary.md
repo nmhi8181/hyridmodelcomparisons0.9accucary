@@ -1,5 +1,9 @@
 # Split Ratio Summary
 
+## Not for Main Research Use
+
+This package uses target-derived hierarchy hint features and should not be used as the main clean benchmark. Use `results/ratio_sweep_objective_valid_2026-04-21` for the logically defensible clean result.
+
 - Best overall accuracy: `hybrid_tcn_lstm` at ratio `50:50` with accuracy `0.9354`.
 - Runs meeting `>= 0.60` accuracy: `16` out of `16`.
 - Runs meeting `>= 0.90` accuracy: `16` out of `16`.

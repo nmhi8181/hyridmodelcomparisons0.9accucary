@@ -1,6 +1,10 @@
 # Model Selection Justification
 
-This is the recommended result package for thesis discussion because it avoids the exact-program oracle feature that produced near-perfect `1.0` results.
+## Superseded for Main Research Use
+
+This file is retained for transparency, but this package should not be used as the main thesis benchmark because it uses target-derived hierarchy hint features. The logical main benchmark is `results/ratio_sweep_objective_valid_2026-04-21`.
+
+This file documents the model-selection outcome inside the assisted ablation package. It avoids the exact-program oracle feature that produced near-perfect `1.0` results, but it still uses target-derived hierarchy hints and is therefore not recommended as the main thesis benchmark.
 
 ## Selection Rule
 
