@@ -18,11 +18,17 @@ MODEL_ORDER = [
 ]
 METRIC_COLUMNS = [
     "test_accuracy",
-    "test_macro_precision",
-    "test_macro_recall",
-    "test_macro_f1",
+    "test_weighted_precision",
+    "test_weighted_recall",
     "test_weighted_f1",
+    "test_macro_f1",
     "test_balanced_accuracy",
+]
+WEIGHTED_METRIC_COLUMNS = [
+    "test_accuracy",
+    "test_weighted_precision",
+    "test_weighted_recall",
+    "test_weighted_f1",
 ]
 
 
@@ -150,6 +156,34 @@ def make_metrics_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
     plt.close()
 
 
+def make_weighted_metrics_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
+    df = combined_df.loc[combined_df["status"] == "completed"].copy()
+    if df.empty:
+        return
+    available_metrics = [column for column in WEIGHTED_METRIC_COLUMNS if column in df.columns]
+    if not available_metrics:
+        return
+    df["label"] = df["split_ratio"].astype(str) + " | " + df["model_family"]
+    heatmap_df = df.set_index("label")[available_metrics]
+    plt.figure(figsize=(9, max(6, 0.45 * len(heatmap_df))))
+    sns.heatmap(
+        heatmap_df,
+        annot=True,
+        fmt=".3f",
+        cmap="YlGnBu",
+        vmin=0.85,
+        vmax=1.0,
+        linewidths=0.4,
+        linecolor="white",
+    )
+    plt.title("Weighted Performance Metrics by Split Ratio and Model")
+    plt.xlabel("Metric")
+    plt.ylabel("Split Ratio | Model")
+    plt.tight_layout()
+    plt.savefig(root_dir / "split_ratio_weighted_metrics_heatmap.png", dpi=220)
+    plt.close()
+
+
 def make_accuracy_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
     df = combined_df.loc[combined_df["status"] == "completed"].copy()
     if df.empty:
@@ -163,6 +197,61 @@ def make_accuracy_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
     plt.ylabel("Model Family")
     plt.tight_layout()
     plt.savefig(root_dir / "split_ratio_accuracy_heatmap.png", dpi=220)
+    plt.close()
+
+
+def make_accuracy_delta_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
+    df = combined_df.loc[combined_df["status"] == "completed"].copy()
+    if df.empty:
+        return
+    best_by_ratio = df.groupby("split_ratio", observed=False)["test_accuracy"].transform("max")
+    df["accuracy_delta_from_best"] = df["test_accuracy"] - best_by_ratio
+    pivot = df.pivot(index="model_family", columns="split_ratio", values="accuracy_delta_from_best")
+    pivot = pivot.reindex(index=MODEL_ORDER, columns=RATIO_ORDER)
+    plt.figure(figsize=(8.5, 4.8))
+    sns.heatmap(
+        pivot,
+        annot=True,
+        fmt=".4f",
+        cmap="RdYlGn",
+        center=0.0,
+        linewidths=0.4,
+        linecolor="white",
+    )
+    plt.title("Accuracy Delta from Best Model in Each Split Ratio")
+    plt.xlabel("Split Ratio")
+    plt.ylabel("Model Family")
+    plt.tight_layout()
+    plt.savefig(root_dir / "split_ratio_accuracy_delta_heatmap.png", dpi=220)
+    plt.close()
+
+
+def make_accuracy_rank_heatmap(root_dir: Path, combined_df: pd.DataFrame) -> None:
+    df = combined_df.loc[combined_df["status"] == "completed"].copy()
+    if df.empty:
+        return
+    df["accuracy_rank"] = df.groupby("split_ratio", observed=False)["test_accuracy"].rank(
+        method="dense",
+        ascending=False,
+    )
+    pivot = df.pivot(index="model_family", columns="split_ratio", values="accuracy_rank")
+    pivot = pivot.reindex(index=MODEL_ORDER, columns=RATIO_ORDER)
+    plt.figure(figsize=(8.5, 4.8))
+    sns.heatmap(
+        pivot,
+        annot=True,
+        fmt=".0f",
+        cmap="YlOrBr_r",
+        vmin=1,
+        vmax=max(4, int(pivot.max().max())),
+        linewidths=0.4,
+        linecolor="white",
+    )
+    plt.title("Accuracy Rank by Split Ratio (1 = Best)")
+    plt.xlabel("Split Ratio")
+    plt.ylabel("Model Family")
+    plt.tight_layout()
+    plt.savefig(root_dir / "split_ratio_accuracy_rank_heatmap.png", dpi=220)
     plt.close()
 
 
@@ -188,16 +277,16 @@ def make_line_graph(root_dir: Path, combined_df: pd.DataFrame) -> None:
     sns.lineplot(
         data=df,
         x="split_ratio",
-        y="test_macro_f1",
+        y="test_weighted_f1",
         hue="model_family",
         style="model_family",
         marker="o",
         ax=axes[1],
         legend=False,
     )
-    axes[1].set_title("Macro-F1 Across Split Ratios")
+    axes[1].set_title("Weighted-F1 Across Split Ratios")
     axes[1].set_xlabel("Train:Test Ratio")
-    axes[1].set_ylabel("Test Macro-F1")
+    axes[1].set_ylabel("Test Weighted-F1")
     axes[1].tick_params(axis="x", rotation=20)
 
     plt.tight_layout()
@@ -225,13 +314,13 @@ def make_grouped_bar_chart(root_dir: Path, combined_df: pd.DataFrame) -> None:
     sns.barplot(
         data=df,
         x="split_ratio",
-        y="test_macro_f1",
+        y="test_weighted_f1",
         hue="model_family",
         ax=axes[1],
     )
-    axes[1].set_title("Macro-F1 by Split Ratio and Model")
+    axes[1].set_title("Weighted-F1 by Split Ratio and Model")
     axes[1].set_xlabel("Train:Test Ratio")
-    axes[1].set_ylabel("Test Macro-F1")
+    axes[1].set_ylabel("Test Weighted-F1")
     axes[1].tick_params(axis="x", rotation=20)
 
     axes[1].legend_.remove()
@@ -294,19 +383,19 @@ def make_test_boxplot(root_dir: Path, combined_df: pd.DataFrame) -> None:
     axes[0].set_ylabel("Test Accuracy")
     axes[0].tick_params(axis="x", rotation=20)
 
-    sns.boxplot(data=df, x="model_family", y="test_macro_f1", ax=axes[1], palette="Greens")
+    sns.boxplot(data=df, x="model_family", y="test_weighted_f1", ax=axes[1], palette="Greens")
     sns.stripplot(
         data=df,
         x="model_family",
-        y="test_macro_f1",
+        y="test_weighted_f1",
         hue="split_ratio",
         dodge=False,
         ax=axes[1],
         alpha=0.75,
     )
-    axes[1].set_title("Test Macro-F1 Distribution Across Split Ratios")
+    axes[1].set_title("Test Weighted-F1 Distribution Across Split Ratios")
     axes[1].set_xlabel("Model Family")
-    axes[1].set_ylabel("Test Macro-F1")
+    axes[1].set_ylabel("Test Weighted-F1")
     axes[1].tick_params(axis="x", rotation=20)
     if axes[0].legend_ is not None:
         axes[0].legend_.remove()
@@ -371,13 +460,14 @@ def write_summary(root_dir: Path, combined_df: pd.DataFrame) -> None:
                 "split_ratio": ratio_label,
                 "best_model": top_row["model_family"],
                 "test_accuracy": top_row["test_accuracy"],
+                "test_weighted_f1": top_row.get("test_weighted_f1"),
                 "test_macro_f1": top_row["test_macro_f1"],
             }
         )
 
     per_ratio_df = pd.DataFrame(per_ratio_rows)
     rounded_ratio_df = per_ratio_df.copy()
-    for column in ("test_accuracy", "test_macro_f1"):
+    for column in ("test_accuracy", "test_weighted_f1", "test_macro_f1"):
         if column in rounded_ratio_df.columns:
             rounded_ratio_df[column] = rounded_ratio_df[column].map(lambda value: f"{value:.4f}")
 
@@ -406,7 +496,10 @@ def main() -> None:
     if not folds_df.empty:
         folds_df.to_csv(root_dir / "split_ratio_cross_validation_folds.csv", index=False)
     make_metrics_heatmap(root_dir, combined_df)
+    make_weighted_metrics_heatmap(root_dir, combined_df)
     make_accuracy_heatmap(root_dir, combined_df)
+    make_accuracy_delta_heatmap(root_dir, combined_df)
+    make_accuracy_rank_heatmap(root_dir, combined_df)
     make_line_graph(root_dir, combined_df)
     make_grouped_bar_chart(root_dir, combined_df)
     make_cv_boxplot(root_dir, folds_df)

@@ -44,6 +44,8 @@ def load_family_metrics(root_dir: Path) -> List[Dict[str, object]]:
                     "test_macro_precision": None,
                     "test_macro_recall": None,
                     "test_macro_f1": None,
+                    "test_weighted_precision": None,
+                    "test_weighted_recall": None,
                     "test_weighted_f1": None,
                     "test_balanced_accuracy": None,
                     "cv_mean_val_accuracy": None,
@@ -76,6 +78,8 @@ def load_family_metrics(root_dir: Path) -> List[Dict[str, object]]:
                 "test_macro_precision": data["hybrid_metrics"].get("test_macro_precision"),
                 "test_macro_recall": data["hybrid_metrics"].get("test_macro_recall"),
                 "test_macro_f1": data["hybrid_metrics"]["test_macro_f1"],
+                "test_weighted_precision": data["hybrid_metrics"].get("test_weighted_precision"),
+                "test_weighted_recall": data["hybrid_metrics"].get("test_weighted_recall"),
                 "test_weighted_f1": data["hybrid_metrics"].get("test_weighted_f1"),
                 "test_balanced_accuracy": data["hybrid_metrics"].get("test_balanced_accuracy"),
                 "cv_mean_val_accuracy": cv.get("mean_val_accuracy"),
@@ -130,6 +134,8 @@ def write_comparison_outputs(root_dir: Path, comparison_df: pd.DataFrame) -> Non
         "test_macro_precision",
         "test_macro_recall",
         "test_macro_f1",
+        "test_weighted_precision",
+        "test_weighted_recall",
         "test_weighted_f1",
         "test_balanced_accuracy",
         "cv_mean_val_accuracy",
@@ -167,10 +173,10 @@ def make_bar_chart(root_dir: Path, comparison_df: pd.DataFrame) -> None:
         return
     metric_specs = [
         ("test_accuracy", "Test Accuracy", "Blues_d"),
-        ("test_macro_precision", "Test Macro-Precision", "Purples_d"),
-        ("test_macro_recall", "Test Macro-Recall", "Oranges_d"),
-        ("test_macro_f1", "Test Macro-F1", "Greens_d"),
-        ("test_weighted_f1", "Test Weighted-F1", "Reds_d"),
+        ("test_weighted_precision", "Test Weighted Precision", "Purples_d"),
+        ("test_weighted_recall", "Test Weighted Recall", "Oranges_d"),
+        ("test_weighted_f1", "Test Weighted F1", "Greens_d"),
+        ("test_macro_f1", "Test Macro-F1", "Reds_d"),
         ("test_balanced_accuracy", "Test Balanced Accuracy", "YlGnBu"),
     ]
     fig, axes = plt.subplots(2, 3, figsize=(20, 10))
@@ -206,10 +212,10 @@ def make_heatmap(root_dir: Path, comparison_df: pd.DataFrame) -> None:
         return
     metric_cols = [
         "test_accuracy",
-        "test_macro_precision",
-        "test_macro_recall",
-        "test_macro_f1",
+        "test_weighted_precision",
+        "test_weighted_recall",
         "test_weighted_f1",
+        "test_macro_f1",
         "test_balanced_accuracy",
     ]
     metric_cols = [column for column in metric_cols if column in df.columns]
@@ -285,6 +291,8 @@ def write_summary(root_dir: Path, comparison_df: pd.DataFrame, folds_df: pd.Data
         "test_macro_precision",
         "test_macro_recall",
         "test_macro_f1",
+        "test_weighted_precision",
+        "test_weighted_recall",
         "test_weighted_f1",
         "test_balanced_accuracy",
         "cv_mean_val_accuracy",
@@ -333,6 +341,8 @@ def write_summary(root_dir: Path, comparison_df: pd.DataFrame, folds_df: pd.Data
                         "test_macro_precision",
                         "test_macro_recall",
                         "test_macro_f1",
+                        "test_weighted_precision",
+                        "test_weighted_recall",
                         "test_weighted_f1",
                         "test_balanced_accuracy",
                         "cv_mean_val_accuracy",

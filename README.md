@@ -31,6 +31,9 @@ The top-level comparison outputs for the achieved package are in:
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_model_comparison.csv`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_metrics_heatmap.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_accuracy_heatmap.png`
+- `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_weighted_metrics_heatmap.png`
+- `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_accuracy_delta_heatmap.png`
+- `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_accuracy_rank_heatmap.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_grouped_bar.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_performance_graph.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_test_boxplot.png`
@@ -40,6 +43,7 @@ The top-level comparison outputs for the achieved package are in:
 The objective-achieving package is an assisted experiment that uses explicit label-hierarchy hint features. See:
 
 - `results/ratio_sweep_objective_assisted_2026-04-22/METHOD_NOTE.md`
+- `results/ratio_sweep_objective_assisted_2026-04-22/INTERPRETATION_NOTE.md`
 
 For the stricter clean exact-target benchmark, see:
 

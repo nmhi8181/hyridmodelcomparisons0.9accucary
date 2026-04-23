@@ -17,12 +17,12 @@
 
 ## Comparison Table
 
-| model_family | test_accuracy | test_macro_precision | test_macro_recall | test_macro_f1 | test_weighted_f1 | test_balanced_accuracy | cv_mean_val_accuracy | cv_mean_val_macro_f1 | temporal_pairs |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| hybrid_tcn_lstm | 0.9354 | 0.2789 | 0.2663 | 0.2570 | 0.9102 | 0.2663 |  |  |  |
-| ft_transformer_gru_attention | 0.9333 | 0.2635 | 0.2676 | 0.2605 | 0.9110 | 0.2676 |  |  |  |
-| xgboost_temporal_gru | 0.9318 | 0.2793 | 0.2721 | 0.2682 | 0.9119 | 0.2721 |  |  |  |
-| deepfm_temporal_tcn | 0.9341 | 0.2509 | 0.2640 | 0.2538 | 0.9098 | 0.2640 |  |  |  |
+| model_family | test_accuracy | test_macro_precision | test_macro_recall | test_macro_f1 | test_weighted_precision | test_weighted_recall | test_weighted_f1 | test_balanced_accuracy | cv_mean_val_accuracy | cv_mean_val_macro_f1 | temporal_pairs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hybrid_tcn_lstm | 0.9354 | 0.2789 | 0.2663 | 0.2570 | 0.8938 | 0.9354 | 0.9102 | 0.2663 |  |  |  |
+| ft_transformer_gru_attention | 0.9333 | 0.2635 | 0.2676 | 0.2605 | 0.8937 | 0.9333 | 0.9110 | 0.2676 |  |  |  |
+| xgboost_temporal_gru | 0.9318 | 0.2793 | 0.2721 | 0.2682 | 0.8963 | 0.9318 | 0.9119 | 0.2721 |  |  |  |
+| deepfm_temporal_tcn | 0.9341 | 0.2509 | 0.2640 | 0.2538 | 0.8911 | 0.9341 | 0.9098 | 0.2640 |  |  |  |
 
 ## Output Files
 
