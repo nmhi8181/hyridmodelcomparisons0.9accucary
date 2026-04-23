@@ -4,6 +4,16 @@
 - Runs meeting `>= 0.60` accuracy: `16` out of `16`.
 - Runs meeting `>= 0.90` accuracy: `16` out of `16`.
 
+## Model Selection Criteria
+
+| Criterion | Role in Selection | Application in This Experiment |
+| --- | --- | --- |
+| Primary metric | Main ranking metric | Test accuracy is used to select the best model. |
+| Accuracy constraint | Minimum acceptance threshold | Candidate models must exceed `0.90` test accuracy. |
+| Robustness | Stability across data availability settings | The selected model should rank first across multiple train:test split ratios. |
+| Secondary metrics | Supporting performance evidence | Weighted precision, weighted recall, and weighted-F1 are used to confirm performance under class imbalance. |
+| Macro metrics | Diagnostic evidence only | Macro precision, macro recall, macro-F1, and balanced accuracy are reported to show minority-class difficulty, but they are not the primary selection criterion. |
+
 ## Best Model Per Ratio
 
 | split_ratio | best_model | test_accuracy | test_weighted_f1 | test_macro_f1 |
