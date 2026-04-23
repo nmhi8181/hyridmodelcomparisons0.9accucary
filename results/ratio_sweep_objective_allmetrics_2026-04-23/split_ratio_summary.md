@@ -1,5 +1,11 @@
 # Split Ratio Summary
 
+## Invalidated for Research Use
+
+This near-perfect result should not be used as the main thesis result. It was produced with the exact academic-program oracle feature `oracle_exact_program_hint`, which leaks direct label information into the model input.
+
+Use `ratio_sweep_objective_assisted_2026-04-22` for the recommended non-perfect research discussion.
+
 - Best overall accuracy: `hybrid_tcn_lstm` at ratio `80:20` with accuracy `1.0000`.
 - Runs meeting `>= 0.60` accuracy: `16` out of `16`.
 - Runs meeting `>= 0.90` accuracy: `16` out of `16`.

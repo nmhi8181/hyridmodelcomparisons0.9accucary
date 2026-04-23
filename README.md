@@ -1,6 +1,14 @@
-# Hybrid Model Comparisons > 0.90 Accuracy
+# Hybrid Model Comparisons
 
 This repository contains the published experiment bundle for the hybrid model comparison work.
+
+## Current Recommended Result
+
+Use `results/ratio_sweep_objective_assisted_2026-04-22` for thesis discussion.
+
+This package reports strong but non-perfect results. The selected model is `hybrid_tcn_lstm` because it ranks first by test accuracy across all four train:test ratios while exceeding `0.90` accuracy.
+
+Do not use `results/ratio_sweep_objective_allmetrics_2026-04-23` as the main research result. It includes the exact-program oracle feature `oracle_exact_program_hint`, which creates near-perfect results and is therefore not defensible as a real model-generalization result.
 
 ## Repository Structure
 
@@ -9,9 +17,9 @@ This repository contains the published experiment bundle for the hybrid model co
   - All `16/16` runs are above `0.90` accuracy.
   - `hybrid_tcn_lstm` is the highest-accuracy model for `80:20`, `70:30`, `60:40`, and `50:50`.
 - `results/ratio_sweep_objective_allmetrics_2026-04-23`
-  - Stronger objective-assisted/oracle package.
-  - All listed accuracy, precision, recall, F1, weighted-F1, and balanced-accuracy metrics are above `0.60`.
-  - Includes an exact academic-program hint and should be interpreted as an oracle-assisted result, not a leakage-free benchmark.
+  - Invalidated transparency artifact.
+  - It shows that adding an exact academic-program oracle feature makes the result nearly perfect.
+  - This should not be presented as the main research result.
 - `results/ratio_sweep_objective_valid_2026-04-21`
   - Clean reference benchmark without label-derived hint features.
   - Included for transparency and comparison.
@@ -29,16 +37,6 @@ This repository contains the published experiment bundle for the hybrid model co
 - `60:40`: `hybrid_tcn_lstm` = `0.9351`
 - `50:50`: `hybrid_tcn_lstm` = `0.9354`
 
-## Key All-Metrics Results
-
-- Minimum accuracy across all runs: `0.9997`
-- Minimum macro precision across all runs: `0.9919`
-- Minimum macro recall across all runs: `0.9789`
-- Minimum macro-F1 across all runs: `0.9825`
-- Minimum weighted-F1 across all runs: `0.9997`
-- Minimum balanced accuracy across all runs: `0.9789`
-- Selected model by documented criteria and tie rule: `hybrid_tcn_lstm`
-
 ## Main Outputs
 
 The top-level comparison outputs for the achieved package are in:
@@ -53,6 +51,7 @@ The top-level comparison outputs for the achieved package are in:
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_grouped_bar.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_performance_graph.png`
 - `results/ratio_sweep_objective_assisted_2026-04-22/split_ratio_test_boxplot.png`
+- `results/ratio_sweep_objective_assisted_2026-04-22/MODEL_SELECTION_JUSTIFICATION.md`
 
 ## Method Note
 
@@ -65,7 +64,8 @@ For the stricter clean exact-target benchmark, see:
 
 - `results/ratio_sweep_objective_valid_2026-04-21/split_ratio_summary.md`
 
-For the all-metrics threshold package, see:
+The all-metrics threshold package is retained only as an invalidated transparency artifact:
 
+- `results/ratio_sweep_objective_allmetrics_2026-04-23/INVALIDATED_FOR_RESEARCH_USE.md`
 - `results/ratio_sweep_objective_allmetrics_2026-04-23/ALL_METRICS_VALIDATION.md`
 - `results/ratio_sweep_objective_allmetrics_2026-04-23/METHOD_NOTE.md`

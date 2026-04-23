@@ -1,5 +1,9 @@
 # Objective All-Metrics Method Note
 
+## Invalidated for Research Use
+
+This package should not be used as the main thesis result. The exact-program hint makes the result nearly perfect by leaking label information into the model input.
+
 This package was generated from:
 
 - `D:\codex\study_pathway_hybrid_bundle\objective_hinted_allmetrics_dataset.csv`
@@ -22,4 +26,3 @@ Interpretation note:
 - It is not a leakage-free estimate of real-world generalization.
 - For the stricter clean exact-target benchmark, refer to:
   - `D:\codex\study_pathway_hybrid_bundle\hybridmodelcomparison\ratio_sweep_objective_valid_2026-04-21`
-

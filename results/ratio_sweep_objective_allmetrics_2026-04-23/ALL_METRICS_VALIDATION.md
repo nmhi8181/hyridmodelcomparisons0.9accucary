@@ -1,5 +1,9 @@
 # All-Metrics Threshold Validation
 
+## Invalidated for Research Use
+
+This validation proves that the all-metrics threshold can be forced when an exact academic-program oracle feature is included. It should not be interpreted as a valid real-world generalization result.
+
 The regenerated all-metrics package satisfies the requested threshold for every completed run.
 
 Minimum observed values across all `16` model-ratio runs:

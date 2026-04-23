@@ -51,7 +51,8 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help=(
             "Add an exact academic-program oracle hint. This is only for objective-assisted "
-            "stress/package generation and is not leakage-free."
+            "stress/package generation and is not leakage-free. Do not use this for the "
+            "main research result."
         ),
     )
     return parser.parse_args()
@@ -100,6 +101,10 @@ def main() -> None:
     if args.include_exact_program_hint:
         if "ACADEMIC_PROGRAM" not in df.columns:
             raise ValueError("Cannot add exact-program hint because ACADEMIC_PROGRAM is missing.")
+        print(
+            "WARNING: --include-exact-program-hint creates label leakage and should not be "
+            "used for the main research result."
+        )
         df["oracle_exact_program_hint"] = df["ACADEMIC_PROGRAM"]
 
     required_cols = ["oracle_grouped_5class_hint", "oracle_three_class_hint"]
