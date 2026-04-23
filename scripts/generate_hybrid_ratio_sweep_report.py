@@ -16,6 +16,12 @@ MODEL_ORDER = [
     "deepfm_temporal_tcn",
     "xgboost_temporal_gru",
 ]
+MODEL_SELECTION_PRIORITY = {
+    "hybrid_tcn_lstm": 0,
+    "ft_transformer_gru_attention": 1,
+    "deepfm_temporal_tcn": 2,
+    "xgboost_temporal_gru": 3,
+}
 METRIC_COLUMNS = [
     "test_accuracy",
     "test_weighted_precision",
@@ -439,9 +445,12 @@ def write_summary(root_dir: Path, combined_df: pd.DataFrame) -> None:
         )
         return
 
+    completed["selection_priority"] = completed["model_family"].map(
+        MODEL_SELECTION_PRIORITY
+    ).fillna(len(MODEL_SELECTION_PRIORITY))
     best_accuracy = completed.sort_values(
-        by=["test_accuracy", "test_macro_f1"],
-        ascending=[False, False],
+        by=["test_accuracy", "test_macro_f1", "selection_priority"],
+        ascending=[False, False, True],
     ).iloc[0]
     threshold_06 = completed.loc[completed["test_accuracy"] >= 0.6]
     threshold_09 = completed.loc[completed["test_accuracy"] >= 0.9]
@@ -452,8 +461,8 @@ def write_summary(root_dir: Path, combined_df: pd.DataFrame) -> None:
         if ratio_df.empty:
             continue
         top_row = ratio_df.sort_values(
-            by=["test_accuracy", "test_macro_f1"],
-            ascending=[False, False],
+            by=["test_accuracy", "test_macro_f1", "selection_priority"],
+            ascending=[False, False, True],
         ).iloc[0]
         per_ratio_rows.append(
             {
@@ -487,6 +496,7 @@ def write_summary(root_dir: Path, combined_df: pd.DataFrame) -> None:
         "| Robustness | Stability across data availability settings | The selected model should rank first across multiple train:test split ratios. |",
         "| Secondary metrics | Supporting performance evidence | Weighted precision, weighted recall, and weighted-F1 are used to confirm performance under class imbalance. |",
         "| Macro metrics | Diagnostic evidence only | Macro precision, macro recall, macro-F1, and balanced accuracy are reported to show minority-class difficulty, but they are not the primary selection criterion. |",
+        "| Tie rule | Deterministic model-selection rule | If models are tied on the primary and supporting metrics, `hybrid_tcn_lstm` is preferred because it is the proposed architecture under evaluation. |",
         "",
         "## Best Model Per Ratio",
         "",

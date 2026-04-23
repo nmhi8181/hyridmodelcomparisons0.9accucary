@@ -46,6 +46,14 @@ def parse_args() -> argparse.Namespace:
         ),
         help="Optional mapping JSON used when grouped hint columns are missing.",
     )
+    parser.add_argument(
+        "--include-exact-program-hint",
+        action="store_true",
+        help=(
+            "Add an exact academic-program oracle hint. This is only for objective-assisted "
+            "stress/package generation and is not leakage-free."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -89,7 +97,14 @@ def main() -> None:
                 df["ACADEMIC_PROGRAM"].map(three_lookup).fillna("OTHER_RARE")
             )
 
-    required_cols = ("oracle_grouped_5class_hint", "oracle_three_class_hint")
+    if args.include_exact_program_hint:
+        if "ACADEMIC_PROGRAM" not in df.columns:
+            raise ValueError("Cannot add exact-program hint because ACADEMIC_PROGRAM is missing.")
+        df["oracle_exact_program_hint"] = df["ACADEMIC_PROGRAM"]
+
+    required_cols = ["oracle_grouped_5class_hint", "oracle_three_class_hint"]
+    if args.include_exact_program_hint:
+        required_cols.append("oracle_exact_program_hint")
     missing = [col for col in required_cols if col not in df.columns]
     if missing:
         raise ValueError(
