@@ -12,6 +12,12 @@ Do not use `results/ratio_sweep_objective_assisted_2026-04-22` or `results/ratio
 
 See `LOGICAL_RESULT_AUDIT.md` for the corrected interpretation.
 
+Latest clean optimization attempt:
+
+- `results/ratio_sweep_clean_optimized_fast_2026-04-24/HONEST_OPTIMIZATION_AUDIT.md`
+- New optimized `hybrid_tcn_lstm` accuracy on clean `80:20`: `0.6116`
+- Requested `>0.90` clean accuracy target: not achieved
+
 ## Repository Structure
 
 - `results/ratio_sweep_objective_assisted_2026-04-22`
@@ -25,6 +31,10 @@ See `LOGICAL_RESULT_AUDIT.md` for the corrected interpretation.
 - `results/ratio_sweep_objective_valid_2026-04-21`
   - Clean reference benchmark without label-derived hint features.
   - Recommended as the main logically defensible benchmark.
+- `results/ratio_sweep_clean_optimized_fast_2026-04-24`
+  - Latest clean optimization attempt for `hybrid_tcn_lstm`.
+  - Includes an audit, metric heatmap, accuracy-threshold bar chart, and final TCN-LSTM artifacts.
+  - Confirms the clean optimization does not reach the requested `>0.90` accuracy threshold.
 - `scripts`
   - Reproducibility scripts used to prepare the hinted dataset, run the sweep, and generate reports.
 - `data/objective_hinted_dataset.csv`
