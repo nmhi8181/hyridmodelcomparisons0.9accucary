@@ -1,0 +1,19 @@
+{
+  "family": "Industrial and Production Engineering",
+  "status": "trained",
+  "program_class_names": [
+    "INDUSTRIAL ENGINEERING",
+    "PRODUCTION ENGINEERING",
+    "PRODUCTIVITY AND QUALITY ENGINEERING"
+  ],
+  "test_metrics": {
+    "accuracy": 0.9833641404805915,
+    "macro_precision": 0.32778804682686385,
+    "macro_recall": 0.3333333333333333,
+    "macro_f1": 0.33053743398570984,
+    "weighted_precision": 0.9670050327831325,
+    "weighted_recall": 0.9833641404805915,
+    "weighted_f1": 0.9751159790040534,
+    "balanced_accuracy": 0.3333333333333333
+  }
+}

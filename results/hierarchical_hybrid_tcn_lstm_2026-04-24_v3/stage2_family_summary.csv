@@ -1,0 +1,6 @@
+family,status,program_count,train_rows,val_rows,test_rows,test_accuracy,test_macro_f1
+Chemical and Process Engineering,constant,1,650,150,200,1.0,1.0
+Civil and Geospatial Engineering,trained,5,2263,522,696,0.9525862068965517,0.19514348785871966
+"Electrical, Electronic and Control Engineering",trained,6,797,184,245,0.6816326530612244,0.15047948662484678
+Industrial and Production Engineering,trained,3,3514,811,1082,0.9833641404805915,0.33053743398570984
+"Mechanical, Aerospace and Mechatronic Engineering",trained,4,841,195,259,0.8687258687258688,0.2573651452282158

@@ -18,6 +18,14 @@ Latest clean optimization attempt:
 - New optimized `hybrid_tcn_lstm` accuracy on clean `80:20`: `0.6116`
 - Requested `>0.90` clean accuracy target: not achieved
 
+Latest clean hierarchical recommendation attempt:
+
+- `results/hierarchical_hybrid_tcn_lstm_2026-04-24_v3/hierarchical_experiment_summary.md`
+- Clean exact-program `top-1` accuracy: `0.4089`
+- Clean exact-program `top-3` accuracy: `0.7965`
+- Clean exact-program `top-5` accuracy: `0.9327`
+- This is the strongest clean result in the repository because it frames the task as a recommendation list rather than an exact single-label prediction.
+
 ## Repository Structure
 
 - `results/ratio_sweep_objective_assisted_2026-04-22`
@@ -35,6 +43,10 @@ Latest clean optimization attempt:
   - Latest clean optimization attempt for `hybrid_tcn_lstm`.
   - Includes an audit, metric heatmap, accuracy-threshold bar chart, and final TCN-LSTM artifacts.
   - Confirms the clean optimization does not reach the requested `>0.90` accuracy threshold.
+- `results/hierarchical_hybrid_tcn_lstm_2026-04-24_v3`
+  - Clean hierarchical family-to-program recommendation experiment.
+  - Uses no target-derived hint columns and no test-set peeking.
+  - Achieves `0.9327` exact-program top-5 accuracy while exact top-1 remains `0.4089`.
 - `scripts`
   - Reproducibility scripts used to prepare the hinted dataset, run the sweep, and generate reports.
 - `data/objective_hinted_dataset.csv`

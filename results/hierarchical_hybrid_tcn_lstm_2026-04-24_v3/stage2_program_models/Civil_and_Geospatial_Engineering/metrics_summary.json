@@ -1,0 +1,21 @@
+{
+  "family": "Civil and Geospatial Engineering",
+  "status": "trained",
+  "program_class_names": [
+    "CATASTRAL ENGINEERING AND GEODESY",
+    "CIVIL CONSTRUCTIONS",
+    "CIVIL ENGINEERING",
+    "TOPOGRAPHIC ENGINEERY",
+    "TRANSPORTATION AND ROAD ENGINEERING"
+  ],
+  "test_metrics": {
+    "accuracy": 0.9525862068965517,
+    "macro_precision": 0.19079136690647483,
+    "macro_recall": 0.1996987951807229,
+    "macro_f1": 0.19514348785871966,
+    "weighted_precision": 0.9100967501860581,
+    "weighted_recall": 0.9525862068965517,
+    "weighted_f1": 0.9308568673720534,
+    "balanced_accuracy": 0.1996987951807229
+  }
+}

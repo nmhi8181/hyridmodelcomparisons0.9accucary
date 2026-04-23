@@ -1,0 +1,8 @@
+{
+  "family": "Chemical and Process Engineering",
+  "status": "constant",
+  "program_label": "CHEMICAL ENGINEERING",
+  "train_rows": 650,
+  "val_rows": 150,
+  "test_rows": 200
+}

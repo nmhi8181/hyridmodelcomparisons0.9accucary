@@ -1,0 +1,20 @@
+{
+  "family": "Mechanical, Aerospace and Mechatronic Engineering",
+  "status": "trained",
+  "program_class_names": [
+    "AERONAUTICAL ENGINEERING",
+    "ELECTROMECHANICAL ENGINEERING",
+    "MECHANICAL ENGINEERING",
+    "MECHATRONICS ENGINEERING"
+  ],
+  "test_metrics": {
+    "accuracy": 0.8687258687258688,
+    "macro_precision": 0.2821078431372549,
+    "macro_recall": 0.2623210352422908,
+    "macro_f1": 0.2573651452282158,
+    "weighted_precision": 0.7853433265197971,
+    "weighted_recall": 0.8687258687258688,
+    "weighted_f1": 0.8208013585606947,
+    "balanced_accuracy": 0.2623210352422908
+  }
+}

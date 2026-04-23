@@ -1,0 +1,22 @@
+{
+  "family": "Electrical, Electronic and Control Engineering",
+  "status": "trained",
+  "program_class_names": [
+    "AUTOMATION ENGINEERING",
+    "CONTROL ENGINEERING",
+    "ELECTRIC ENGINEERING",
+    "ELECTRIC ENGINEERING AND TELECOMMUNICATIONS",
+    "ELECTRONIC ENGINEERING",
+    "INDUSTRIAL AUTOMATIC ENGINEERING"
+  ],
+  "test_metrics": {
+    "accuracy": 0.6816326530612244,
+    "macro_precision": 0.15627763041556145,
+    "macro_recall": 0.1697128851540616,
+    "macro_f1": 0.15047948662484678,
+    "weighted_precision": 0.5432469008823688,
+    "weighted_recall": 0.6816326530612244,
+    "weighted_f1": 0.5860246239962565,
+    "balanced_accuracy": 0.1697128851540616
+  }
+}
